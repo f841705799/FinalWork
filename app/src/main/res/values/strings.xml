@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">FinalWork</string>
+    <string name="app_name">图书清单</string>
+    <string name="account">账号:</string>
+    <string name="accountHint">请输入账号</string>
+    <string name="passwordHint">请输入密码</string>
+    <string name="password">密码:</string>
+    <string name="register">注册</string>
 </resources>
