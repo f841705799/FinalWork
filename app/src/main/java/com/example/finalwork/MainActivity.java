@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences spf = getSharedPreferences("account",MODE_PRIVATE);
         username = spf.getString("username","");
         password = spf.getString("password","");
+        gotoListActivity = new Intent(this,BookList.class);
         if ( username != "" & password != ""){
             usernameE.setText(username);
             passwordE.setText(password);
