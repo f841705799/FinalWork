@@ -44,6 +44,7 @@
     <TableRow
         android:layout_marginTop="20dp">
         <CheckBox
+            android:id="@+id/Check_remember"
             android:layout_gravity="center"
             />
         <TextView
