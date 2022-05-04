@@ -25,6 +25,8 @@
             android:id="@+id/Edit_username"
             android:hint="@string/accountHint"
             android:layout_weight="1"
+            android:inputType="text"
+            android:digits="@string/textlimit"
             />
     </TableRow>
     <TableRow>
@@ -36,14 +38,35 @@
         <EditText
             android:id="@+id/Edit_password"
             android:hint="@string/passwordHint"
+            android:inputType="textPassword"
             android:layout_weight="1"/>
     </TableRow>
-    <Button
-        android:id="@+id/Button_reg"
-        android:text="@string/register"
-        android:textSize="24sp"
-        android:layout_marginTop="20dp"
-        />
+    <TableRow
+        android:layout_marginTop="20dp">
+        <CheckBox
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:text="@string/remember"
+            android:textSize="24sp"
+            android:layout_gravity="center"/>
+    </TableRow>
+    <TableRow
+        android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/Button_reg"
+            android:text="@string/register"
+            android:textSize="24sp"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            />
+        <Button
+            android:id="@+id/Button_log"
+            android:text="@string/login"
+            android:textSize="24sp"
+            android:layout_weight="1"/>
+    </TableRow>
+
 
 
 

@@ -29,6 +29,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         if (oldVersion < 1){
             db.execSQL("CREATE TABLE user(Username TEXT PRIMARY KEY,Password TEXT);");
             db.execSQL("CREATE TABLE book(ISBN INTERGER PRIMARY KEY,subname TEXT,author TEXT,authorIntro TEXT,photoUrl TEXT,publishing TEXT,published TEXT,description TEXT,doubanScore TEXT);");
+            db.execSQL("CREATE TABLE record(Username TEXT PRIMARY KEY,ISBN Integer);");
         }
 
 
@@ -50,5 +51,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         BookValues.put("description",description);
         BookValues.put("doubanScore",doubanScore);
         db.insert("book",null,BookValues);
+    }
+    public static void insertBookRecord(SQLiteDatabase db,String Username,Integer ISBN){
+        ContentValues RecordValues = new ContentValues();
+        RecordValues.put("Username",Username);
+        RecordValues.put("ISBN",ISBN);
+        db.insert("record",null,RecordValues);
     }
 }
