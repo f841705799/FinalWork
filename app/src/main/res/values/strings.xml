@@ -8,4 +8,10 @@
     <string name="login">登录</string>
     <string name="remember">记住密码</string>
     <string name="textlimit">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</string>
+    <string name="addbook">添加书本</string>
+    <string name="isbn">ISBN：</string>
+    <string name="bookname">书名：</string>
+    <string name="author">作者：</string>
+    <string name="publishing">出版社：</string>
+    <string name="addbookButton">添加</string>
 </resources>
