@@ -28,8 +28,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion){
         if (oldVersion < 1){
             db.execSQL("CREATE TABLE user(Username TEXT PRIMARY KEY,Password TEXT);");
-            db.execSQL("CREATE TABLE book(ISBN INTERGER PRIMARY KEY,subname TEXT,author TEXT,authorIntro TEXT,photoUrl TEXT,publishing TEXT,published TEXT,description TEXT,doubanScore TEXT);");
-            db.execSQL("CREATE TABLE record(Username TEXT PRIMARY KEY,ISBN Integer);");
+            db.execSQL("CREATE TABLE book(ISBN INTERGER PRIMARY KEY,name TEXT,author TEXT,authorIntro TEXT,photoUrl TEXT,publishing TEXT,published TEXT,description TEXT,douban Integer,doubanScore INTERGER);");
+            db.execSQL("CREATE TABLE record(Username TEXT,ISBN Integer);");
         }
 
 
@@ -40,19 +40,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         UserValues.put("Password",Password);
         db.insert("user",null,UserValues);
     }
-    public static void insertBook(SQLiteDatabase db,Integer ISBN,String subname,String author,String authorIntro,String publishing ,String published,String description,String doubanScore){
+    public static void insertBook(SQLiteDatabase db,Long ISBN,String name,String author,String authorIntro,String photoUrl,String publishing ,String published,String description,Integer douban,Integer doubanScore){
         ContentValues BookValues = new ContentValues();
         BookValues.put("ISBN",ISBN);
-        BookValues.put("subname",subname);
+        BookValues.put("name",name);
         BookValues.put("author",author);
         BookValues.put("authorIntro",authorIntro);
+        BookValues.put("photoUrl",photoUrl);
         BookValues.put("publishing",publishing);
         BookValues.put("published",published);
         BookValues.put("description",description);
+        BookValues.put("douban",douban);
         BookValues.put("doubanScore",doubanScore);
         db.insert("book",null,BookValues);
     }
-    public static void insertBookRecord(SQLiteDatabase db,String Username,Integer ISBN){
+    public static void insertBookRecord(SQLiteDatabase db,String Username,Long ISBN){
         ContentValues RecordValues = new ContentValues();
         RecordValues.put("Username",Username);
         RecordValues.put("ISBN",ISBN);

@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText usernameE,passwordE;
     private CheckBox rememberC;
     private Intent gotoListActivity;
-    private String username,password;
+    private String password;
+    public static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
                     }
                     Toast.makeText(MainActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                    gotoListActivity.putExtra("username",username);
                     startActivity(gotoListActivity);
                 }
                 else {
