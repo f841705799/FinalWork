@@ -82,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("password",passwordE.getText().toString());
                         editor.apply();
                     }
+                    else {
+                        SharedPreferences.Editor editor = getSharedPreferences("account",MODE_PRIVATE).edit();
+                        editor.clear();
+                        editor.commit();
+                    }
                     Toast.makeText(MainActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
                     startActivity(gotoListActivity);
                 }

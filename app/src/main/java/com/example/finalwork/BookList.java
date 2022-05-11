@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -37,6 +39,19 @@ public class BookList extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list_view_book);
         bookAdapter = new BookAdapter(BookList.this,R.layout.book_item,BookList);
         listView.setAdapter(bookAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(BookList.this,String.valueOf(position),Toast.LENGTH_SHORT).show();
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(BookList.this,String.valueOf(position),Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 
     @Override
