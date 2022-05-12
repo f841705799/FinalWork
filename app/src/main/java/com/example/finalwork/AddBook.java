@@ -22,6 +22,7 @@ import com.google.zxing.client.android.Intents;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -103,7 +104,7 @@ public class AddBook extends AppCompatActivity {
         publishing_E = (EditText) findViewById(R.id.Edit_publishing);
         progressDialog=new ProgressDialog(AddBook.this);
         progressDialog.setMessage("正在加载...");
-        progressDialog.setCancelable(false); //如果设置为false，则不可以使用back键返回
+        progressDialog.setCancelable(true); //如果设置为false，则不可以使用back键返回
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,9 +120,16 @@ public class AddBook extends AppCompatActivity {
         Addbook_B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SQLiteHelper.insertBook(db,ISBN,name,author,authorIntro,photoUrl,publishing,published,description,douban,doubanScore);
-                SQLiteHelper.insertBookRecord(db,username,ISBN);
-                Toast.makeText(AddBook.this,"添加成功",Toast.LENGTH_SHORT).show();
+                if (db.query("book",null,"ISBN = ?",new String[]{String.valueOf(ISBN)},null,null,null).getCount()==0){
+                    SQLiteHelper.insertBook(db,ISBN,name,author,authorIntro,photoUrl,publishing,published,description,douban,doubanScore);
+                    }
+                if (db.query("record",null,"Username = ? and ISBN = ?",new String[]{username, String.valueOf(ISBN)},null,null,null).getCount()==0){
+                    SQLiteHelper.insertBookRecord(db,username,ISBN);
+                    Toast.makeText(AddBook.this,"添加成功",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(AddBook.this,"添加失败，该记录已存在",Toast.LENGTH_SHORT).show();
+                }
                 startActivity(gobacktoList);
             }
         });
@@ -197,12 +205,18 @@ public class AddBook extends AppCompatActivity {
                 authorIntro = data.getString("authorIntro");
                 description = data.getString("description");
                 showResponse();
-
             }
 
 
-        } catch (Exception e) {
+        } catch (JSONException e){
             e.printStackTrace();
+            progressDialog.hide();
+            Toast.makeText(AddBook.this,"数据返回异常，请检查ISBN",Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            progressDialog.hide();
+            Toast.makeText(AddBook.this,"发生未知错误，请重试",Toast.LENGTH_SHORT).show();
         }
         return ret;
     }
